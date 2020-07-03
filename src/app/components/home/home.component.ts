@@ -1,3 +1,4 @@
+import { empty } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   reference: number;
+  frames: number;
   referenceList = [];
 
   constructor() { }
@@ -19,5 +21,18 @@ export class HomeComponent implements OnInit {
     this.referenceList.push(reference);
     console.log(this.referenceList);
   }
+
+
+  algorithmOptimal(numberFrames: number) {
+    let pages = [];
+    for (let i = 0; i < numberFrames; i++) {
+      let frames = Array(this.referenceList.length);
+      pages.push(frames);
+    }
+
+    console.log(pages);
+
+  }
+
 
 }

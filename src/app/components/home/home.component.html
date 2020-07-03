@@ -10,5 +10,10 @@
             <li>{{reference}}</li>
         </ul>
     </div>
-
+    <div>
+        <br>
+        Ingrese el numero de Marcos:
+        <input type="text" placeholder="Ingrese marcos" [(ngModel)] = "frames" required maxlength="8">
+        </div>
+        <button (click) = 'algorithmOptimal(frames)'>Aplicar Algoritmo</button>
 </div>
