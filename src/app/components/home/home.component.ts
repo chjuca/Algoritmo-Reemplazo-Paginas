@@ -1,6 +1,11 @@
 import { empty } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * We are not using this component
+ *
+ * @deprecated
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
