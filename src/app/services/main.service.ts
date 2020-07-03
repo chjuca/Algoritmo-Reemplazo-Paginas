@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
-  // Here will be the global variables of our project
+  // TODO: Here will be the global variables of our project
 
 
   /** Contructor */

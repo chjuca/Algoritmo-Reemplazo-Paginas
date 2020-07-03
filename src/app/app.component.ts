@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/**
+ * Main component. We can control the visibilty of the nested
+ * components: initialForm, graph and result
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +11,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Algoritmo-Reemplazo-Paginas';
+
+
+
 }
