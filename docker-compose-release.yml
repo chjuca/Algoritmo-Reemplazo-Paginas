@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  client-angular:
+    image: algoritmoreemplazopaginas
+    container_name: project_container
+    build: .
+    command: ng serve --host 0.0.0.0
+    ports:
+      - 4200:4200
+      - 49153:49153
+      - 9876:9876
+      - 49152:49152
+
+
+
+
