@@ -1,3 +1,4 @@
+import { MainService } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 
 /**
@@ -10,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InitialFormComponent implements OnInit {
 
-  constructor() { }
+  reference: number;
+  frames: number;
+  referenceList = [];
+
+  constructor(public mainService: MainService) { }
 
   ngOnInit() {
   }
+
+  addReference(reference: number) {
+    this.referenceList.push(reference);
+  }
+
+
+  algorithmOptimal(numberFrames: number) {
+    console.log(this.referenceList);
+    this.mainService.algorithmOptimal(numberFrames, this.referenceList);
+  }
+
+
 
 }

@@ -1,1 +1,11 @@
-<p>graph works!</p>
+<div>
+    <br>
+    <br>
+    <div>
+        <table class="table table-bordered ">
+            <tr *ngFor="let page of pages">
+                <th scope="row" *ngFor="let reference of page"> {{reference}} </th>
+            </tr>
+        </table>
+    </div>
+</div>
