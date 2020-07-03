@@ -3,7 +3,7 @@ version: '3.4'
 services:
   client-angular:
     image: algoritmoreemplazopaginas
-    container_name: project_container
+    container_name: algoritmoreemplazo_container
     build: .
     command: ng serve --host 0.0.0.0
     volumes:
