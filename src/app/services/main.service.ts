@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Main service for hold the main variables of the app, such as the
@@ -8,9 +9,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MainService {
-  // TODO: Here will be the global variables of our project
 
+  pages = [];
+  isClicked = new BehaviorSubject <boolean> (false);
+  customClicked = this.isClicked.asObservable();
 
-  /** Contructor */
   constructor() { }
+
+  algorithmOptimal(numberFrames: number, referenceList: any) {
+    for (let i = 0; i < numberFrames; i++) {
+      let frames = Array(referenceList.length);
+      this.pages.push(frames);
+    }
+
+    this.isClicked.next(true);
+  }
+
+  getPages(): Array <any> {
+    return this.pages;
+  }
+
 }

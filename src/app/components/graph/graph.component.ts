@@ -1,3 +1,4 @@
+import { MainService } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 
 /**
@@ -10,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphComponent implements OnInit {
 
-  constructor() { }
+  pages = [];
+
+  constructor(public mainService: MainService) {
+   }
 
   ngOnInit() {
+    this.mainService.isClicked.subscribe(isClicked => this.pages = this.mainService.getPages());
   }
 
 }
