@@ -16,7 +16,7 @@ export class MainService {
 
   constructor() { }
 
-  algorithmOptimal(numberFrames: number, referenceList: any) {
+  optimalAlgorithm(numberFrames: number, referenceList: any) {
     for (let i = 0; i < numberFrames; i++) {
       let frames = Array(referenceList.length);
       this.pages.push(frames);
