@@ -5,10 +5,14 @@
         <input type="text" placeholder="Ingrese referencia" [(ngModel)] = "reference" required maxlength="8">
         <button type="button" class="btn btn-primary" (click) = 'addReference(reference)'>Agregar Referencia</button>
     </div>
-    <div>
-        <ul *ngFor = 'let reference of referenceList'>
-            <li>{{reference}}</li>
-        </ul>
+    <div class="mt-4">
+        <table class="table table-bordered ">
+            <tr>
+                <th scope="col" *ngFor = 'let reference of referenceList'> 
+                    {{reference}} 
+                </th>
+            </tr>
+        </table>
     </div>
     <div>
         <br>
