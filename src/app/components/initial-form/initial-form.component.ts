@@ -13,21 +13,23 @@ export class InitialFormComponent implements OnInit {
 
   reference: number;
   frames: number;
-  // referenceList = [];
+  referenceList = [];
+  /*
   referenceList = [
     '7', '0', '1', '2', '0',
     '3', '0', '4', '2', '3',
     '0', '3', '2', '1', '2',
     '0', '1', '7', '0', '1'
   ]
+  */
 
   constructor(public mainService: MainService) { }
 
   ngOnInit() {
   }
 
-  addReference(reference: number) {
-    //this.referenceList.push(reference);
+  addReference(reference: string) {
+    this.referenceList.push(reference);
   }
 
 
