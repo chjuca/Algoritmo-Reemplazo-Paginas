@@ -1,25 +1,41 @@
-<div class="card">
-    <div>
-        <br>
-        Ingrese Referencia:
-        <input type="text" placeholder="Ingrese referencia" [(ngModel)] = "reference" required maxlength="8">
-        <button type="button" class="btn btn-primary" (click) = 'addReference(reference)'>Agregar Referencia</button>
+<div class="card mt-3">
+    <div class="container">
+        <form class="form-inline mt-3 mb-4">
+            <div class="form-group">
+                <label for="inputReferenceList">Cadena de referencia: </label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" [(ngModel)] = "reference" name="stringReference" required maxlength="8" placeholder="Ingrese referencia" autocomplete="off">
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-info" (click) = 'addReference(reference)'>
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                </svg>
+            </button>
+        </form>
+        <form>
+            <div class="form-group mt-3 mb-3">
+                <table class="table">
+                    <tr>
+                        <th scope="col" *ngFor = 'let reference of referenceList'> 
+                            {{reference}} 
+                        </th>
+                    </tr>
+                </table>
+                <hr>
+            </div>
+        </form>
+        <form class="form-inline mt-3">
+            <div class="form-group mb-4">
+                <label for="inputNumberFrames">Número de marcos: </label>
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" [(ngModel)] = "frames"  name="NumberFrames" required min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off">
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-lg btn-block mb-3" (click) = 'algorithmOptimal(frames)'>
+                Aplicar Algoritmo
+            </button>
+        </form>
     </div>
-    <div class="mt-4">
-        <table class="table table-bordered ">
-            <tr>
-                <th scope="col" *ngFor = 'let reference of referenceList'> 
-                    {{reference}} 
-                </th>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <br>
-        Ingrese el numero de Marcos:
-        <input type="text" placeholder="Ingrese marcos" [(ngModel)] = "frames" required maxlength="8">
-        </div>
-        <br>
-        <button type="button" class="btn btn-success" (click) = 'algorithmOptimal(frames)'>Aplicar Algoritmo</button>
-        <br>
 </div>
