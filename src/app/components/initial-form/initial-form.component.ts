@@ -13,15 +13,15 @@ export class InitialFormComponent implements OnInit {
 
   reference: number;
   frames: number;
-  referenceList = [];
-  /*
+  // referenceList = [];
+  
   referenceList = [
     '7', '0', '1', '2', '0',
     '3', '0', '4', '2', '3',
     '0', '3', '2', '1', '2',
     '0', '1', '7', '0', '1'
   ]
-  */
+  
 
   constructor(public mainService: MainService) { }
 
@@ -29,12 +29,12 @@ export class InitialFormComponent implements OnInit {
   }
 
   addReference(reference: string) {
-    this.referenceList.push(reference);
+    // this.referenceList.push(reference);
   }
 
 
   optimalAlgorithm(numberFrames: number) {
-    console.log(this.referenceList);
+    // console.log(this.referenceList);
     this.mainService.optimalAlgorithm(numberFrames, this.referenceList);
   }
 
