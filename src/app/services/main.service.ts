@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { type } from 'os';
+
 
 /**
  * Main service for hold the main variables of the app, such as the
