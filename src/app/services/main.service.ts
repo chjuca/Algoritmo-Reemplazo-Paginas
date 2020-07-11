@@ -34,7 +34,8 @@ export class MainService {
             break;
           } else {
             if (j === numberFrames - 1) {
-              this.pages[j][i] = referenceList[i];
+              const index = this.getIndex(i, referenceList, this.pages);
+              this.pages[index][i] = referenceList[i];
               break;
             }
           }
@@ -62,50 +63,38 @@ export class MainService {
   }
 
   getIndex(start: number, referenceList: any, page: Array<any>) {
-    let index = 0;
-    if (start < referenceList.length) {
-      for (let i = start; i < referenceList.length; i++) {
-        for (let j = 0; j < page.length; j++) {
-          if (page[j][i] === referenceList[i]) {
-            if (j > index) {
-              index = j;
-            }
-          }
+
+    let numbers = Array(page.length);
+    let indexes = Array(numbers.length);
+
+    for (let i = 0; i < page.length; i++) {
+      for (let number of page[i][start]) {
+        numbers[i] = number;
+      }
+    }
+
+    for (let i = 0; i < numbers.length; i++) {
+      for (let j = start; j < referenceList.length; j++) {
+        if (referenceList[j] === numbers[i]) {
+          indexes[i] = j;
+          break;
+        } else {
+          indexes[i] = 100;           // Pensar en la condicion del FIFO
         }
       }
     }
+
+    const max = Math.max(...indexes);
+    const index = indexes.indexOf(max);
+
+
+
+    console.log(indexes);
+    console.log(index);
+    console.log('______________');
     return index;
+
   }
-
-
-  // for (let number of page) {
-  //   if (number === referenceList[i]) {
-  //     return true;
-  //   }
-  // }
-  // return false;
-
-
-
-  // optimalAlgorithm(numberFrames: number, referenceList: any) {
-
-  //   for (let i = 0; i < numberFrames; i++) {
-  //     var frames = [];
-  //     let tmp_numberFrames = 0
-  //     if(i == 0){
-  //       frames.push(referenceList[i]);
-  //     }else{
-  //       while(tmp_numberFrames <= i){
-  //         frames.push(referenceList[tmp_numberFrames]);
-  //         tmp_numberFrames ++ ;
-  //       }
-  //     }
-  //     this.pages.push(frames);
-  //     //this.pages.push(frames);
-  //   }
-  //   this.numberFrames = numberFrames;
-  //   this.isClicked.next(true);
-  // }
 
   getPages(): Array<any> {
     return this.pages;
