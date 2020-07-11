@@ -25,15 +25,18 @@ export class MainService {
     }
 
     for (let i = 0; i < referenceList.length; i++) {
+      if (this.isReferenced(i, referenceList, this.pages)) {
 
-      for (let j = 0; j < numberFrames; j++) {
-        if (this.pages[j][i] === undefined) {
-          this.pages[j][i] = referenceList[i];
-          break;
-        } else {
-          if (j === numberFrames - 1) {
+      } else {
+        for (let j = 0; j < numberFrames; j++) {
+          if (this.pages[j][i] === undefined) {
             this.pages[j][i] = referenceList[i];
             break;
+          } else {
+            if (j === numberFrames - 1) {
+              this.pages[j][i] = referenceList[i];
+              break;
+            }
           }
         }
       }
@@ -42,10 +45,47 @@ export class MainService {
           this.pages[k][i + 1] = this.pages[k][i];
         }
       }
-    }
 
-    this.isClicked.next(true);
+      this.isClicked.next(true);
+    }
   }
+
+  isReferenced(i: number, referenceList: any, page: Array<any>) {
+    if (i < referenceList.length) {
+      for (let j = 0; j < page.length; j++) {
+        if (page[j][i] === referenceList[i]) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
+
+  getIndex(start: number, referenceList: any, page: Array<any>) {
+    let index = 0;
+    if (start < referenceList.length) {
+      for (let i = start; i < referenceList.length; i++) {
+        for (let j = 0; j < page.length; j++) {
+          if (page[j][i] === referenceList[i]) {
+            if (j > index) {
+              index = j;
+            }
+          }
+        }
+      }
+    }
+    return index;
+  }
+
+
+  // for (let number of page) {
+  //   if (number === referenceList[i]) {
+  //     return true;
+  //   }
+  // }
+  // return false;
+
+
 
   // optimalAlgorithm(numberFrames: number, referenceList: any) {
 
@@ -68,7 +108,6 @@ export class MainService {
   // }
 
   getPages(): Array<any> {
-    console.log(this.pages);
     return this.pages;
   }
   getNumberFrames() {
