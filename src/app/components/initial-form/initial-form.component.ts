@@ -15,16 +15,16 @@ export class InitialFormComponent implements OnInit {
   frames: number;
   // referenceList = [];
 
-  // referenceList = [
-  //   '7', '0', '7', '2', '0',
-  //   '3', '0', '4','3', '2',
-  //   '0', '3', '2', '1', '2',
-  //   '0', '1', '7', '0', '1'
-  // ];
-
   referenceList = [
-    '2', '3', '2', '1', '5', '2', '4', '5', '3', '2', '5', '2'
+    '7', '0', '7', '2', '0',
+    '3', '0', '4','3', '2',
+    '0', '3', '2', '1', '2',
+    '0', '1', '7', '0', '1'
   ];
+
+  // referenceList = [
+  //   '2', '3', '2', '1', '5', '2', '4', '5', '3', '2', '5', '2'
+  // ];
 
 
   constructor(public mainService: MainService) { }
