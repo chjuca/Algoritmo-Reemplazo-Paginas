@@ -17,8 +17,8 @@ export class GraphComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.mainService.isClicked.subscribe(isClicked => this.pages = this.mainService.getPages());
-    this.pages = this.mainService.getPages();
+    this.mainService.isClicked.subscribe(isClicked => this.pages = this.mainService.getPages());
+    // this.pages = this.mainService.getPages();
   }
 
 }
