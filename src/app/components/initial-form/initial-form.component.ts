@@ -25,6 +25,7 @@ export class InitialFormComponent implements OnInit {
   // referenceList = [
   //   '2', '3', '2', '1', '5', '2', '4', '5', '3', '2', '5', '2'
   // ];
+  // Agregar Datos manualmente
 
 
   constructor(public mainService: MainService) { }
