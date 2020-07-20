@@ -1,3 +1,4 @@
+import { MainService } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 
 /**
@@ -10,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  constructor() { }
+  errors = 0;
+
+  constructor(public mainService: MainService) { }
 
   ngOnInit() {
+    this.mainService.errors.subscribe(errors => this.errors = errors);
   }
 
 }

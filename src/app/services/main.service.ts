@@ -15,6 +15,10 @@ export class MainService {
   numberFrames = 0;                               // numero de marcos dados por el usuario
   isClicked = new BehaviorSubject<boolean>(false);
   customClicked = this.isClicked.asObservable();      // Observable para detectar cambios en el estado del boton
+  errorCounter = 0;
+  errors = new BehaviorSubject<number>(0);
+  customErrors = this.errors.asObservable();
+
 
   constructor() { }
 
@@ -29,11 +33,12 @@ export class MainService {
 
 
     for (let i = 0; i < referenceList.length; i++) {
-      if (this.isReferenced(i, referenceList, this.pages)) {      // validamos si la columna actual ya tiene cargada la referencia (llamamos a la funcion)
+      if (this.isReferenced(i, referenceList, this.pages)) {        // validamos si la columna actual ya tiene cargada la referencia 
+                                                                    // (llamamos a la funcion)
       } else {
         for (let j = 0; j < numberFrames; j++) {
           if (this.pages[j][i] === undefined) {                   // validamos si todos los marcos han sido ocupados
-            this.pages[j][i] = referenceList[i];                  // si hay un marco libre lo usamos
+            this.pages[j][i] = referenceList[i];                  // si hay un marco libre lo usamos;
             break;
           } else {                                                // en el caso que no haya marcos libres
             if (j === numberFrames - 1) {
@@ -43,6 +48,8 @@ export class MainService {
             }
           }
         }
+        this.errorCounter++;
+        this.errors.next(this.errorCounter);                                         // contamos un error de pagina
       }
 
       // =============================================
@@ -129,6 +136,10 @@ export class MainService {
   }
   getNumberFrames() {           // metodo para obtener el numero de marcos
     return this.numberFrames;
+  }
+
+  getErrors(): number {
+    return this.errorCounter;
   }
 
   // (っ◔◡◔)っ ♥ Ahora este codigo es su problema ♥
