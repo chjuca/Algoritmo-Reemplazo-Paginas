@@ -37,9 +37,7 @@ export class InitialFormComponent implements OnInit {
     this.referenceList.push(reference);
   }
 
-
   optimalAlgorithm(numberFrames: number) {
-    console.log(this.referenceList);
     this.mainService.optimalAlgorithm(numberFrames, this.referenceList);
   }
 
