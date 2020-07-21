@@ -51,16 +51,38 @@ export class MainService {
         this.errorCounter++;
         this.errors.next(this.errorCounter);                                         // contamos un error de pagina
       }
-
+      var previusReference = '';
       // =============================================
       for (let k = 0; k < numberFrames; k++) {
         if (i < referenceList.length - 1) {
-          this.pages[k][i + 1] = this.pages[k][i];                 // Copiamos el contenido de la pagina en la siguiente
+          this.pages[k][i + 1] = this.pages[k][i];
+          // console.log(this.pages[k][i]); 
+          previusReference += this.pages[k][i];          // Copiamos el contenido de la pagina en la siguiente
         }
       }
+      // console.log(previusReference);
       // ==============================================
 
       this.isClicked.next(true);                                    // cambiamos el estado del observable
+    }
+    /*
+      * Eliminar marcos de referencia iguales
+    */
+    for (let i = 0; i < this.pages[0].length; i++){
+      var currentReference = '';
+      var nextReference = '';
+      
+      for (let j = 0; j < numberFrames; j++){  
+        currentReference += this.pages[j][i]; // Obtenemos el marco de pagina actual
+        nextReference += this.pages[j][i + 1]; // Obtenemos el siguiente marco de pagina.
+      }
+
+      // Si ambos marcos de pagina son iguales significa que no hubo ningún reemplazo de página.
+      if (currentReference == nextReference){
+        for(let j = 0; j < numberFrames; j++){
+          this.pages[j][i] = undefined;
+        }
+      }    
     }
   }
 
