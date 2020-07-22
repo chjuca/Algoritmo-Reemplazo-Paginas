@@ -11,7 +11,8 @@ import { BehaviorSubject, empty } from 'rxjs';
 })
 export class MainService {
 
-  pages: any;                                    // array que reprecenta la matriz de paginas
+  pages: any; 
+  auxPages: any;                                   // array que reprecenta la matriz de paginas
   numberFrames = 0;                               // numero de marcos dados por el usuario
   isClicked = new BehaviorSubject<boolean>(false);
   customClicked = this.isClicked.asObservable();      // Observable para detectar cambios en el estado del boton
@@ -23,6 +24,7 @@ export class MainService {
   constructor() { }
 
   optimalAlgorithm(numberFrames: number, referenceList: any) {
+    this.setAuxPages(referenceList);
     this.pages = [];
     this.errorCounter = 0;
     // ============================================
@@ -158,6 +160,15 @@ export class MainService {
     return index;           // retornamos el indice calculado
 
   }
+
+  setAuxPages(auxReferenceList: any){
+    this.auxPages = auxReferenceList;
+  }
+
+  getAuxPages(): Array<any> {      // metodo para obtener las paginas
+    return this.auxPages;
+  }
+
 
   getPages(): Array<any> {      // metodo para obtener las paginas
     return this.pages;

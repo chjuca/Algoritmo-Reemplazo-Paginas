@@ -27,14 +27,15 @@
                 </table>
             </div>
         </form>
-        <form class="form-inline mt-3 " novalidate>
+        <form #formularioMarcos="ngForm" class="form-inline mt-3 " novalidate>
             <div class="form-group mb-4">
                 <label for="inputNumberFrames">Número de marcos: </label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="frames" [(ngModel)] = "frames"  name="NumberFrames" required min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off">
+                    <input type="number" class="form-control" id="frames" [(ngModel)] = "frames"  name="frames" required min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off">
+
                 </div>
             </div>
-            <button type="submit" class="btn btn-success btn-lg btn-block mb-3" (click) = 'optimalAlgorithm(frames)'>
+            <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)'>
                 Aplicar Algoritmo
             </button>
         </form>

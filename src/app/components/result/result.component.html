@@ -1,10 +1,8 @@
 <div>
-    <br><br>
     <div class="container result" *ngIf="errors">
-        <div class="alert alert-info" role="alert">
-            Resultados
+        N&uacute;mero de fallos : {{errors}}
+        <div class="text-center col-auto mt-3">
+            <button class="btn btn-lg btn-outline-dark mt-3" (click)='opthimalReset()'>Nuevo</button>
         </div>
-        N&uacute;mero de errores : {{errors}}
     </div>
-
 </div>

@@ -14,13 +14,27 @@ export class InitialFormComponent implements OnInit {
   reference: number;
   frames: number;
   // referenceList = [];
-
+  
   referenceList = [
      '7', '0', '1', '2', '0',
      '3', '0', '4','2', '3',
      '0', '3', '2', '1', '2',
      '0', '1', '7', '0', '1'
   ];
+  /*
+  referenceList = [
+    '2', '3', '2', '1', '5', '2',
+    '4', '5', '3', '2', '5', '2'
+  ];
+  */
+  
+  auxReferenceList = [
+    '7', '0', '1', '2', '0',
+    '3', '0', '4','2', '3',
+    '0', '3', '2', '1', '2',
+    '0', '1', '7', '0', '1'
+ ];
+
 
   // referenceList = [
   //   '2', '3', '2', '1', '5', '2', '4', '5', '3', '2', '5', '2'
@@ -41,7 +55,9 @@ export class InitialFormComponent implements OnInit {
   optimalAlgorithm(numberFrames: number) {
     this.mainService.optimalAlgorithm(numberFrames, this.referenceList);
     // this.referenceList = [];
+    this.referenceList = [];
     this.frames = null;
   }
+
   
 }
