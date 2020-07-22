@@ -24,6 +24,7 @@ export class MainService {
 
   optimalAlgorithm(numberFrames: number, referenceList: any) {
     this.pages = [];
+    this.errorCounter = 0;
     // ============================================
     for (let i = 0; i < numberFrames; i++) {
       let frames = Array(referenceList.length);         // Creamos la matriz segun el alto y ancho dado por el usuario
