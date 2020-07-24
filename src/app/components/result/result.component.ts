@@ -1,5 +1,6 @@
 import { MainService } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
+import { GraphComponent } from '../graph/graph.component';
 
 /**
  * Component for show the result of the proccess such as the number of page erros
@@ -12,11 +13,20 @@ import { Component, OnInit } from '@angular/core';
 export class ResultComponent implements OnInit {
 
   errors = 0;
-
-  constructor(public mainService: MainService) { }
+  constructor(public mainService: MainService
+  ) { }
 
   ngOnInit() {
     this.mainService.errors.subscribe(errors => this.errors = errors);
   }
 
+
+  /**
+   * Reset the variables state and the form to let the userr apply again the 
+   * algorithm 
+   */
+  opthimalReset(){  
+    // TODO: 
+    console.log("Volver al estado inicial")
+  }
 }

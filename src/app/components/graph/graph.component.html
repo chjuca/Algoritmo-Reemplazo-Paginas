@@ -1,11 +1,24 @@
-<div>
-    <br><br>
-    <div>
-        <table class="table table-bordered ">
+<div *ngIf="pages">
+    <div style="text-align: center;" class="alert alert-info mt-5" role="alert">
+        RESULTADOS
+    </div>
+    <div class="form-group mt-3 mb-3 table-responsive-xl">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="text-align: center;" scope="col" *ngFor = 'let reference of auxPages'>
+                        {{reference}}
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
             <tr *ngFor="let page of pages">
-                <th *ngFor="let reference of page">
+                <td style="text-align: center;" *ngFor="let reference of page">
                     {{reference}}
-                </th>
+                </td>
             </tr>
         </table>
     </div>

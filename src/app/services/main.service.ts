@@ -11,7 +11,8 @@ import { BehaviorSubject, empty } from 'rxjs';
 })
 export class MainService {
 
-  pages = [];                                     // array que reprecenta la matriz de paginas
+  pages: any; 
+  auxPages: any;                                   // array que reprecenta la matriz de paginas
   numberFrames = 0;                               // numero de marcos dados por el usuario
   isClicked = new BehaviorSubject<boolean>(false);
   customClicked = this.isClicked.asObservable();      // Observable para detectar cambios en el estado del boton
@@ -23,14 +24,15 @@ export class MainService {
   constructor() { }
 
   optimalAlgorithm(numberFrames: number, referenceList: any) {
-
+    this.setAuxPages(referenceList);
+    this.pages = [];
+    this.errorCounter = 0;
     // ============================================
     for (let i = 0; i < numberFrames; i++) {
       let frames = Array(referenceList.length);         // Creamos la matriz segun el alto y ancho dado por el usuario
       this.pages.push(frames);
     }
     // =============================================
-
 
     for (let i = 0; i < referenceList.length; i++) {
       if (this.isReferenced(i, referenceList, this.pages)) {        // validamos si la columna actual ya tiene cargada la referencia 
@@ -43,7 +45,7 @@ export class MainService {
           } else {                                                // en el caso que no haya marcos libres
             if (j === numberFrames - 1) {
               const index = this.getIndex(i, referenceList, this.pages);      // Obtenemos el indice de la pagina a ser remplazada
-              this.pages[index][i] = referenceList[i];                        // remplazamos la pagina
+              this.pages[index][i] = referenceList[i];  // remplazamos la pagina
               break;
             }
           }
@@ -51,19 +53,47 @@ export class MainService {
         this.errorCounter++;
         this.errors.next(this.errorCounter);                                         // contamos un error de pagina
       }
-
+      
       // =============================================
       for (let k = 0; k < numberFrames; k++) {
         if (i < referenceList.length - 1) {
-          this.pages[k][i + 1] = this.pages[k][i];                 // Copiamos el contenido de la pagina en la siguiente
+          this.pages[k][i + 1] = this.pages[k][i]; // Copiamos el contenido de la pagina en la siguiente
         }
       }
+      // console.log(previusReference);
       // ==============================================
-
-      this.isClicked.next(true);                                    // cambiamos el estado del observable
+      this.isClicked.next(true);                                    // cambiamos el estado del observable  
     }
-  }
+    // =============================================
+    /*
+      * Eliminar marcos de referencia iguales
+    */
+  
+    var aux = 0;
+    for (let i = 0; i < referenceList.length; i++){
+      var currentReference = '';
+      var nextReference = ''
+      for (let j = 0; j < numberFrames; j++){
 
+        // Accedemos al marco de pagina donde hubo el ultimo reemplazo.
+        if (this.pages[j][i] == null) {
+          currentReference += this.pages[j][aux]; // Obtenemos el marco de pagina actual
+        } else {
+          currentReference += this.pages[j][i]; // Obtenemos el marco de pagina actual
+        }
+        nextReference += this.pages[j][i + 1]; 
+      }
+
+      // Si ambos marcos de pagina son iguales significa que no hubo ningún reemplazo de página.
+      if (currentReference == nextReference){
+        aux = i; // Obtenemos el indice del ultimo marco de pagina donde hubo un reemplazo de pagina.
+        for(let j = 0; j < numberFrames; j++){
+          this.pages[j][i + 1] = null; 
+        }
+      }
+    }  
+  }
+    
   isReferenced(i: number, referenceList: any, page: Array<any>) {
     if (i < referenceList.length) {
       for (let j = 0; j < page.length; j++) {
@@ -130,6 +160,15 @@ export class MainService {
     return index;           // retornamos el indice calculado
 
   }
+
+  setAuxPages(auxReferenceList: any){
+    this.auxPages = auxReferenceList;
+  }
+
+  getAuxPages(): Array<any> {      // metodo para obtener las paginas
+    return this.auxPages;
+  }
+
 
   getPages(): Array<any> {      // metodo para obtener las paginas
     return this.pages;

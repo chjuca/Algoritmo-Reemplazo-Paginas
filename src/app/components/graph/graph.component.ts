@@ -12,13 +12,13 @@ import { Component, OnInit } from '@angular/core';
 export class GraphComponent implements OnInit {
 
   pages = [];
+  auxPages = [];
 
   constructor(public mainService: MainService) {
-   }
+  }
 
   ngOnInit() {
     this.mainService.isClicked.subscribe(isClicked => this.pages = this.mainService.getPages());
-    // this.pages = this.mainService.getPages();
+    this.mainService.isClicked.subscribe(isClicked => this.auxPages = this.mainService.getAuxPages());
   }
-
 }
