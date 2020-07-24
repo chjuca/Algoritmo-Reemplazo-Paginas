@@ -20,7 +20,13 @@ export class ResultComponent implements OnInit {
     this.mainService.errors.subscribe(errors => this.errors = errors);
   }
 
+
+  /**
+   * Reset the variables state and the form to let the userr apply again the 
+   * algorithm 
+   */
   opthimalReset(){  
+    // TODO: 
     console.log("Volver al estado inicial")
   }
 }
