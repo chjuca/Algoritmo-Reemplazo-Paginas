@@ -15,11 +15,6 @@ export class InitialFormComponent implements OnInit {
   frames: number;
   referenceList = [];
   
-
-
-
-
-
   constructor(public mainService: MainService) { }
 
   ngOnInit() {
@@ -32,9 +27,17 @@ export class InitialFormComponent implements OnInit {
 
   optimalAlgorithm(numberFrames: number) {
     this.mainService.optimalAlgorithm(numberFrames, this.referenceList);
-    // this.referenceList = [];
     this.referenceList = [];
     this.frames = null;
+  }
+
+  validateEmptyReference(numberFrames: number): boolean{
+    let isEmpty = true;
+    if (!this.referenceList){
+      //this.optimalAlgorithm(numberFrames);
+      isEmpty = false;
+    }
+    return isEmpty;
   }
 
   

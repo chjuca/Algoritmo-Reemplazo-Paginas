@@ -31,13 +31,34 @@
             <div class="form-group mb-4">
                 <label for="inputNumberFrames">Número de marcos: </label>
                 <div class="col-sm-5">
-                    <input type="number" class="form-control" id="frames" [(ngModel)] = "frames"  name="frames" required min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off">
-
+                    <input id="frames" name="frames" class="form-control" type="number" pattern="^[1-9]\d*" [(ngModel)]="frames" #name="ngModel" min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off" required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)'>
+            <button type="button" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" data-toggle="modal" data-target="#emptyModal" *ngIf="referenceList.length == 0">
+                Aplicar Algoritmo 
+            </button>
+        
+            <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)' *ngIf="referenceList.length > 0">
                 Aplicar Algoritmo
             </button>
+            <div class="modal" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="emptyModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Debe agregar una cadena de referencia
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </form>
     </div>
 </div>
