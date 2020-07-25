@@ -29,29 +29,29 @@ export class MainService {
     this.errorCounter = 0;
     // ============================================
     for (let i = 0; i < numberFrames; i++) {
-      let frames = Array(referenceList.length);         // Creamos la matriz segun el alto y ancho dado por el usuario
+      let frames = Array(referenceList.length);  // Creamos la matriz segun el alto y ancho dado por el usuario
       this.pages.push(frames);
     }
     // =============================================
 
     for (let i = 0; i < referenceList.length; i++) {
-      if (this.isReferenced(i, referenceList, this.pages)) {        // validamos si la columna actual ya tiene cargada la referencia 
-                                                                    // (llamamos a la funcion)
+      if (this.isReferenced(i, referenceList, this.pages)) {  // validamos si la columna actual ya tiene cargada la referencia 
+                                                                    
       } else {
         for (let j = 0; j < numberFrames; j++) {
-          if (this.pages[j][i] === undefined) {                   // validamos si todos los marcos han sido ocupados
-            this.pages[j][i] = referenceList[i];                  // si hay un marco libre lo usamos;
+          if (this.pages[j][i] === undefined) {  // validamos si todos los marcos han sido ocupados
+            this.pages[j][i] = referenceList[i];  // si hay un marco libre lo usamos;
             break;
-          } else {                                                // en el caso que no haya marcos libres
+          } else {   // en el caso que no haya marcos libres
             if (j === numberFrames - 1) {
-              const index = this.getIndex(i, referenceList, this.pages);      // Obtenemos el indice de la pagina a ser remplazada
+              const index = this.getIndex(i, referenceList, this.pages); // Obtenemos el indice de la pagina a ser remplazada
               this.pages[index][i] = referenceList[i];  // remplazamos la pagina
               break;
             }
           }
         }
         this.errorCounter++;
-        this.errors.next(this.errorCounter);                                         // contamos un error de pagina
+        this.errors.next(this.errorCounter);   // contamos un error de pagina
       }
       
       // =============================================
@@ -60,9 +60,8 @@ export class MainService {
           this.pages[k][i + 1] = this.pages[k][i]; // Copiamos el contenido de la pagina en la siguiente
         }
       }
-      // console.log(previusReference);
       // ==============================================
-      this.isClicked.next(true);                                    // cambiamos el estado del observable  
+      this.isClicked.next(true);   // cambiamos el estado del observable  
     }
     // =============================================
     /*
@@ -97,7 +96,7 @@ export class MainService {
   isReferenced(i: number, referenceList: any, page: Array<any>) {
     if (i < referenceList.length) {
       for (let j = 0; j < page.length; j++) {
-        if (page[j][i] === referenceList[i]) {                      // verificamos que la referencia, no se encuentra cargada
+        if (page[j][i] === referenceList[i]) {  // verificamos que la referencia, no se encuentra cargada
           return true;
         }
       }
@@ -107,12 +106,12 @@ export class MainService {
 
   getIndex(start: number, referenceList: any, page: Array<any>) {
 
-    let numbers = Array(page.length);           // Array que nos ayuda a obtener las referencias de la pagina
-    let indexes = Array(numbers.length);        // Array que nos ayuda a obtener los indices
+    let numbers = Array(page.length);  // Array que nos ayuda a obtener las referencias de la pagina
+    let indexes = Array(numbers.length); // Array que nos ayuda a obtener los indices
 
     // =====================================
     for (let i = 0; i < page.length; i++) {
-      for (let number of page[i][start]) {              // obtenemos los valores de la pagina actual
+      for (let number of page[i][start]) {  // obtenemos los valores de la pagina actual
         numbers[i] = number;
       }
     }
@@ -121,7 +120,7 @@ export class MainService {
     // ====================================================
     for (let i = 0; i < numbers.length; i++) {
       for (let j = start; j < referenceList.length; j++) {
-        if (referenceList[j] === numbers[i]) {        // vemos que referencias seran cargadas en el futuro y cuales seran las proximas
+        if (referenceList[j] === numbers[i]) { // vemos que referencias seran cargadas en el futuro y cuales seran las proximas
           indexes[i] = j;
           break;
         }
@@ -141,23 +140,23 @@ export class MainService {
         while ( this.pages[i][start] === this.pages[i][count] && count > 0 ) {
           count--;
         }
-        indexes[i] = count;            // identificamos que referencia a estado cargada por mas tiempo
+        indexes[i] = count; // identificamos que referencia a estado cargada por mas tiempo
       }
     }
     // =============================================================
 
-    const max = Math.max(...indexes);             // calculamos la posicion maxima en relacion a la lista de referencias
-    const min = Math.min(...indexes);             // calculamos la posicion minima en relacion a la lista de referencias
-    let indexMin = indexes.indexOf(min);          // obtenemos el indice de la posicion maxima
-    let indexMax = indexes.indexOf(max);          // obtenemos el indice de la posicion minima
+    const max = Math.max(...indexes);      // calculamos la posicion maxima en relacion a la lista de referencias
+    const min = Math.min(...indexes);      // calculamos la posicion minima en relacion a la lista de referencias
+    let indexMin = indexes.indexOf(min);   // obtenemos el indice de la posicion maxima
+    let indexMax = indexes.indexOf(max);   // obtenemos el indice de la posicion minima
 
-    if (min > start) {                  // validamos si hay referencias cargadas que no seran proximamente usadas
+    if (min > start) { // validamos si hay referencias cargadas que no seran proximamente usadas
       index = indexMax;
     } else {
       index = indexMin;
     }
 
-    return index;           // retornamos el indice calculado
+    return index;  // retornamos el indice calculado
 
   }
 
@@ -165,24 +164,21 @@ export class MainService {
     this.auxPages = auxReferenceList;
   }
 
-  getAuxPages(): Array<any> {      // metodo para obtener las paginas
+  getAuxPages(): Array<any> {  // metodo para obtener las paginas
     return this.auxPages;
   }
 
 
-  getPages(): Array<any> {      // metodo para obtener las paginas
+  getPages(): Array<any> {  // metodo para obtener las paginas
     return this.pages;
   }
-  getNumberFrames() {           // metodo para obtener el numero de marcos
+  getNumberFrames() {    // metodo para obtener el numero de marcos
     return this.numberFrames;
   }
 
   getErrors(): number {
     return this.errorCounter;
   }
-
-  // (っ◔◡◔)っ ♥ Ahora este codigo es su problema ♥
-
 }
 
 

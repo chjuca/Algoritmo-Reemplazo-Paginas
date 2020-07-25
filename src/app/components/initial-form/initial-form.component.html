@@ -1,43 +1,76 @@
 <div class="card mt-3">
     <div class="container">
-        <form class="form-inline mt-3 mb-4">
-            <div class="form-group">
-                <label for="inputReferenceList">Cadena de referencia: </label>
-                <div class="col-sm-5">
-                    <input type="text" class="form-control" [(ngModel)] = "reference" name="stringReference" required maxlength="8" placeholder="Ingrese referencia" autocomplete="off">
+        <form #formularioMarcos="ngForm" novalidate>
+            <form #formularioReferencia ="ngForm" class="form-inline mt-4 mb-4" novalidate>
+                <div class="form-group">
+                    <label for="inputReferenceList">Cadena de referencia: </label>
+                    <div class="col-sm-5">
+                        <input type="text" id="reference" class="form-control" [(ngModel)] = "reference" name="stringReference" required maxlength="1" placeholder="Ingrese referencia" autocomplete="off">
+                    </div>
                 </div>
-            </div>
-            <button type="reset" class="btn btn-outline-info" (click) = 'addReference(reference)' title="Agregar referencia">
-                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
-                </svg>
-            </button>
-        </form>
-        <form>
-            <div class="form-group mt-3 mb-3 table-responsive-xl">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col" *ngFor = 'let reference of referenceList'>
-                                {{reference}}
-                            </th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </form>
-        <form #formularioMarcos="ngForm" class="form-inline mt-3 " novalidate>
-            <div class="form-group mb-4">
-                <label for="inputNumberFrames">Número de marcos: </label>
-                <div class="col-sm-5">
-                    <input type="number" class="form-control" id="frames" [(ngModel)] = "frames"  name="frames" required min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off">
-
+                <button type="reset" class="btn btn-outline-info" [disabled]="formularioReferencia.form.invalid || validateReference(reference)" (click) = 'addReference(reference)' title="Agregar referencia">
+                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                    </svg>
+                </button>
+                <div class="container mt-2">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div *ngIf="validateReference(reference)" class="alert alert-danger col-2">
+                            Caracter incorrecto
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)'>
-                Aplicar Algoritmo
-            </button>
+            </form>
+            <form>
+                <div class="form-group mt-3 mb-3 table-responsive-xl">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" *ngFor = 'let reference of referenceList'>
+                                    {{reference}}
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </form>
+            <form #formularioMarcos="ngForm" class="form-inline mt-3 " novalidate>
+                <div class="form-group mb-4">
+                    <label for="inputNumberFrames">Número de marcos: </label>
+                    <div class="col-sm-5">
+                        <input id="frames" name="frames" class="form-control" type="number" pattern="^[1-9]\d*" [(ngModel)]="frames" #name="ngModel" min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off" required>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" data-toggle="modal" data-target="#emptyModal" *ngIf="referenceList.length == 0 || referenceList.length < frames || frames == null || frames == 0">
+                    Aplicar Algoritmo 
+                </button>
+                <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)' *ngIf="referenceList.length >= frames && frames != null && frames != 0">
+                    Aplicar Algoritmo
+                </button>
+                <div class="modal" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="emptyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body" *ngIf="referenceList.length == 0">
+                            Debe ingresar una cadena de referencia
+                        </div>
+                        <div class="modal-body" *ngIf="referenceList.length > 0 && referenceList.length < frames">
+                            El número de marcos no puede ser mayor que la cadena de referencia
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
         </form>
     </div>
 </div>
