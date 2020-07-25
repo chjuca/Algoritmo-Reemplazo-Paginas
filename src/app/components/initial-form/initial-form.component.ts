@@ -30,15 +30,14 @@ export class InitialFormComponent implements OnInit {
     this.referenceList = [];
     this.frames = null;
   }
-
-  validateEmptyReference(numberFrames: number): boolean{
-    let isEmpty = true;
-    if (!this.referenceList){
-      //this.optimalAlgorithm(numberFrames);
-      isEmpty = false;
+  
+  validateReference(reference: string): boolean{
+    if(reference==" "|| reference == '"'){
+      return true;
     }
-    return isEmpty;
+    return false;
   }
+  
 
   
 }
