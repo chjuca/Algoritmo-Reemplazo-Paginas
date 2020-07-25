@@ -1,6 +1,7 @@
 import { MainService } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 
+
 /**
  * Component that handles the form when we request the data from the user
  */
@@ -24,7 +25,6 @@ export class InitialFormComponent implements OnInit {
     this.referenceList.push(reference);
   }
   
-
   optimalAlgorithm(numberFrames: number) {
     this.mainService.optimalAlgorithm(numberFrames, this.referenceList);
     this.referenceList = [];
@@ -32,12 +32,9 @@ export class InitialFormComponent implements OnInit {
   }
   
   validateReference(reference: string): boolean{
-    if(reference==" "|| reference == '"'){
+    if(reference==" " || reference == '"'){
       return true;
     }
     return false;
-  }
-  
-
-  
+  }  
 }
