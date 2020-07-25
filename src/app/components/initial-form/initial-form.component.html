@@ -43,10 +43,10 @@
                         <input id="frames" name="frames" class="form-control" type="number" pattern="^[1-9]\d*" [(ngModel)]="frames" #name="ngModel" min=1 maxlength="8" placeholder="Ingrese marcos" autocomplete="off" required>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" data-toggle="modal" data-target="#emptyModal" *ngIf="referenceList.length == 0 || referenceList.length < frames || frames == null">
+                <button type="button" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" data-toggle="modal" data-target="#emptyModal" *ngIf="referenceList.length == 0 || referenceList.length < frames || frames == null || frames == 0">
                     Aplicar Algoritmo 
                 </button>
-                <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)' *ngIf="referenceList.length >= frames && frames != null">
+                <button type="submit" class="btn btn-success btn-lg btn-block mb-3" [disabled]="!formularioMarcos.form.valid" (click) = 'optimalAlgorithm(frames)' *ngIf="referenceList.length >= frames && frames != null && frames != 0">
                     Aplicar Algoritmo
                 </button>
                 <div class="modal" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="emptyModalLabel" aria-hidden="true">
