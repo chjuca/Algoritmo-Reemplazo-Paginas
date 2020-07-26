@@ -159,7 +159,7 @@ export class MainService {
     return index;  // retornamos el indice calculado
 
   }
-
+  
   setAuxPages(auxReferenceList: any){
     this.auxPages = auxReferenceList;
   }
@@ -167,7 +167,6 @@ export class MainService {
   getAuxPages(): Array<any> {  // metodo para obtener las paginas
     return this.auxPages;
   }
-
 
   getPages(): Array<any> {  // metodo para obtener las paginas
     return this.pages;
@@ -180,5 +179,3 @@ export class MainService {
     return this.errorCounter;
   }
 }
-
-
