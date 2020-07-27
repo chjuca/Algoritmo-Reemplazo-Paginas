@@ -92,7 +92,13 @@ export class MainService {
       }
     }  
   }
-    
+  
+  /**
+   * Funcion que verifica si una página está dentro de una lista de frames
+   * @param i               estado actual
+   * @param referenceList   lista de referencia
+   * @param page            pagina a validar 
+   */
   isReferenced(i: number, referenceList: any, page: Array<any>) {
     if (i < referenceList.length) {
       for (let j = 0; j < page.length; j++) {
@@ -104,6 +110,13 @@ export class MainService {
     }
   }
 
+
+  /**
+   * Esta funcion retorna el el indice de la página a reeplazar
+   * @param start           indice del estado actual de la lista
+   * @param referenceList   lista de referencia
+   * @param page            página a remplazar
+   */
   getIndex(start: number, referenceList: any, page: Array<any>) {
 
     let numbers = Array(page.length);  // Array que nos ayuda a obtener las referencias de la pagina
@@ -160,6 +173,10 @@ export class MainService {
 
   }
   
+  /**
+   * Setea una lista a la lista auxiliar
+   * @param auxReferenceList 
+   */
   setAuxPages(auxReferenceList: any){
     this.auxPages = auxReferenceList;
   }
